@@ -1,8 +1,8 @@
 {
-  "name": "ts-template",
+  "name": "unlock-locksmith",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/sebastiantf/ts-template.git",
+  "repository": "https://github.com/sebastiantf/unlock-locksmith.git",
   "author": "Sebastian T F <sebastian.tharakan97@gmail.com>",
   "license": "MIT",
   "scripts": {
