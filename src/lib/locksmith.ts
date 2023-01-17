@@ -4,7 +4,7 @@ import {
 } from '@unlock-protocol/unlock-js';
 import { LOCKSMITH_HOST } from '../common/constants';
 import { ethers } from 'ethers';
-import { MessageData, getSignedSiweMessage } from './siwe';
+import { generateNonce } from 'siwe';
 
 const service = new LocksmithService(
   new LocksmithServiceConfiguration(),
@@ -12,18 +12,18 @@ const service = new LocksmithService(
 );
 
 export const login = async (wallet: ethers.Wallet) => {
-  const messageData: MessageData = {
+  const siweMessage = LocksmithService.createSiweMessage({
     domain: 'coinvise.co',
+    nonce: generateNonce(),
     chainId: (await wallet.provider.getNetwork()).chainId,
     uri: 'https://coinvise.co/',
     version: '1',
     statement: '',
-  };
+    address: await wallet.getAddress(),
+  });
 
-  const { message, signature } = await getSignedSiweMessage(
-    wallet,
-    messageData
-  );
+  const message = siweMessage.prepareMessage();
+  const signature = await wallet.signMessage(message);
 
   const response = await service.login({
     message,
