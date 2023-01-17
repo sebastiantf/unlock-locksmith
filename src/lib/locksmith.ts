@@ -6,6 +6,12 @@ import { LOCKSMITH_HOST } from '../common/constants';
 import { ethers } from 'ethers';
 import { generateNonce } from 'siwe';
 
+export interface UpdateLockMetadataRequest {
+  metadata?: {
+    [key: string]: any;
+  };
+}
+
 const service = new LocksmithService(
   new LocksmithServiceConfiguration(),
   LOCKSMITH_HOST
@@ -35,7 +41,6 @@ export const login = async (wallet: ethers.Wallet) => {
   return { accessToken, refreshToken, walletAddress };
 };
 
-
 export const getLockMetadata = async (
   wallet: ethers.Wallet,
   lockAddress: string
@@ -60,6 +65,25 @@ export const getKeyMetadata = async (
     ).chainId,
     lockAddress,
     keyId
+  );
+  return data;
+};
+
+export const updateLockMetadata = async (
+  wallet: ethers.Wallet,
+  lockAddress: string,
+  metadata: UpdateLockMetadataRequest,
+  accessToken: string
+) => {
+  const { data } = await service.updateLockMetadata(
+    (
+      await wallet.provider.getNetwork()
+    ).chainId,
+    lockAddress,
+    metadata,
+    {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    }
   );
   return data;
 };
