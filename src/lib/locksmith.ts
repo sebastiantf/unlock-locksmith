@@ -34,3 +34,32 @@ export const login = async (wallet: ethers.Wallet) => {
 
   return { accessToken, refreshToken, walletAddress };
 };
+
+
+export const getLockMetadata = async (
+  wallet: ethers.Wallet,
+  lockAddress: string
+) => {
+  const { data } = await service.lockMetadata(
+    (
+      await wallet.provider.getNetwork()
+    ).chainId,
+    lockAddress
+  );
+  return data;
+};
+
+export const getKeyMetadata = async (
+  wallet: ethers.Wallet,
+  lockAddress: string,
+  keyId: string
+) => {
+  const { data } = await service.keyMetadata(
+    (
+      await wallet.provider.getNetwork()
+    ).chainId,
+    lockAddress,
+    keyId
+  );
+  return data;
+};
