@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@unlock-protocol/unlock-js": "^0.32.17",
+    "axios": "^1.2.2",
     "ethers": "^5.7.2",
     "siwe": "^1.1.6"
   }
