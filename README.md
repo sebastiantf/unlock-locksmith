@@ -2,6 +2,8 @@
 
 This repo implements using Unlock Protocol's [Locksmith API](https://docs.unlock-protocol.com/tools/locksmith/) and [SIWE](https://github.com/spruceid/siwe), to login and update a Lock's metadata
 
+More React-friendly implementations can be found on [unlock-app](https://github.com/unlock-protocol/unlock/tree/master/unlock-app) and [flocker](https://github.com/unlock-protocol/flocker/)
+
 #### Sample outputs
 
 ```sh
